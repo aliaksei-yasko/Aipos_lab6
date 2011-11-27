@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="" reloadable="true">
-  <ResourceLink global="jdbc/Weapon" name="jdbc/Weapon" type="javax.sql.DataSource"/>
 </Context>
 

@@ -6,8 +6,8 @@
     Author     : Admin
 --%>
 
+<%-- Setup encoding request --%>
 <fmt:requestEncoding value="utf-8"/>
-<sql:setDataSource dataSource="jdbc/Weapon" /> 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page isThreadSafe="false" %>
@@ -20,18 +20,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Просмотр справочника</title>
+        <title>Изменение оружия</title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
+    <%-- Declarate variables --%>
     <%!
-        private String nameWeapon = "";
-        private String typeWeapon = "";
-        private String weightWeapon = "";
-        private String lengthWeapon = "";
-        private String caliberWeapon = "";
-        private String speadWeapon = "";
+        public String nameWeapon = "";
+        public String typeWeapon = "";
+        public String weightWeapon = "";
+        public String lengthWeapon = "";
+        public  String caliberWeapon = "";
+        public String speadWeapon = "";
     %>
 
+    <%-- Service method --%>
     <%
         Context    initContext = null;
         Context    envContext = null;
@@ -40,15 +42,41 @@
         PreparedStatement  statement = null;
         ResultSet result = null;
         try{
+            /* Get datasource fron context */
             initContext = new InitialContext();
             envContext = (Context) initContext.lookup("java:comp/env");
             dataSource = (DataSource)envContext.lookup("jdbc/Weapon");
+            /* Get connection to data base from datasource */
             connection = dataSource.getConnection();
 
+            /* If this page sended request update data base */
+            if (request.getParameter("updateWeapon") != null){
+                String update = "UPDATE Weapons SET typeweapon = ?, weightweapon = ?, "
+                        + "lengthweapon = ?, caliberweapon = ?, speadweapon = ? "
+                        + "WHERE nameweapon = ?";
+                statement = connection.prepareStatement(update);
+                statement.setString(1, request.getParameter("typeWeapon"));
+                statement.setDouble(2, Double.parseDouble(request.getParameter("weightWeapon")));
+                statement.setDouble(3, Double.parseDouble(request.getParameter("lengthWeapon")));
+                statement.setDouble(4, Double.parseDouble(request.getParameter("caliberWeapon")));
+                statement.setDouble(5, Double.parseDouble(request.getParameter("speadWeapon")));
+                statement.setString(6, request.getParameter("nameWeapon"));
+                int check = statement.executeUpdate();
+                /* Display information about operation */
+                if(check == 0){
+                    out.println("<center><h1>Оружие не было обновлено.</h1></center>");
+                } else {
+                    out.println("<center><h1>Оружие было обновлено.</h1></center>");
+                }
+            }
+
+            /* Select data from data base about current weapon */
             String query = "select * from weapons where weapons.nameweapon = ?";
             statement = connection.prepareStatement(query);
             statement.setString(1, (String)request.getParameter("nameWeapon"));
             result = statement.executeQuery();
+            /* If we don't got result anounce about that.
+               In other case display result */
             if(!result.next()){
                 out.println("<h1><strong>Такого оружия не существует в справочнике.</strong></h1>");
             } else {
@@ -60,55 +88,64 @@
                 speadWeapon = result.getString("speadweapon");
             }
         } catch (Exception ex) {
+            out.println("<center><h1>Оружие не было обновлено.</h1></center>");
             ex.printStackTrace();
         } finally {
             connection.close();
             statement.close();
         }
      %>
-    <body>
-        <table border="0">
-            <thead>
-                <tr>
-                    <th colspan="2">Weapon <%= request.getParameter("nameWeapon")%></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Название: </strong></td>
-                    <td><span style="font-size:smaller; font-style:italic;"><%=nameWeapon %></span></td>
-                </tr>
-                <tr>
-                    <td><strong>Тип:</strong></td>
-                    <td>
-                        <%=typeWeapon %>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Вес: </strong></td>
-                    <td>
-                        <%=weightWeapon %>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Длина: </strong></td>
-                    <td>
-                        <%=lengthWeapon %>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Калибр: </strong></td>
-                    <td>
-                        <%=caliberWeapon %>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>Скорость пули: </strong></td>
-                    <td>
-                        <%=speadWeapon %>
-                    </td>
-                </tr>
-        </tbody>
-    </table>
+    <body>     
+        <center>
+            <form action="changeWeapon.jsp" method="POST">
+            <table border="0">
+                <thead>
+                    <tr>
+                        <th colspan="2">Изменение информации об оружии: <%= nameWeapon %></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Название:</td>
+                        <td><input type="text" class="input_text" name="nameWeapon" value="<%= nameWeapon %>" size="100" /></td>
+                    </tr>
+                    <tr>
+                        <td>Тип:</td>
+                        <td><input type="text" class="input_text" name="typeWeapon" value="<%= typeWeapon %>" size="100" /></td>
+                    </tr>
+                    <tr>
+                        <td>Вес:</td>
+                        <td><input type="text" class="input_text" name="weightWeapon" value="<%= weightWeapon %>" size="100" /></td>
+                    </tr>
+                    <tr>
+                        <td>Длина:</td>
+                        <td><input type="text" class="input_text" name="lengthWeapon" value="<%= lengthWeapon %>" size="100" /></td>
+                    </tr>
+                    <tr>
+                        <td>Калибр:</td>
+                        <td><input type="text" class="input_text" name="caliberWeapon" value="<%= caliberWeapon %>" size="100"/></td>
+                    </tr>
+                    <tr>
+                        <td>Скорость пули:</td>
+                        <td><input type="text" class="input_text" name="speadWeapon" value="<%= speadWeapon %>" size="100"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" value="Изменить" name="updateWeapon" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            </form>
+            <form name="onIndex" action="index.jsp" method="POST">
+                <table border="0">
+                    <thead>
+                        <tr>
+                            <th><center><input type="submit" value="На главную" name="onMain" /></center></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </form>
+        </center>
     </body>
 </html>

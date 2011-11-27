@@ -19,12 +19,11 @@ body {
 }
 
 h1 {
-    text-align: left;
-    letter-spacing: 6px;
+    letter-spacing: 3px;
     font-size: 1.4em;
     color: #be7429;
     font-weight: normal;
-    width: 450px;
+    width: 800px;
 }
 
 table {
@@ -45,14 +44,31 @@ td {
     line-height: 4;
 }
 
-input{
+.td_end{
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px #be7429 solid;
+    line-height: 4;
+}
+
+input {
     width: 100px;
     height: 30px;
     background-color: #be7429;
-    color: #fff;
+    color: #aff;
     font-weight: bold;
     cursor: pointer;
 }
+
+.input_text {
+    width: 100px;
+    height: 20px;
+    background-color: #d5e7e0;
+    color: #be7429;
+    font-weight: bold;
+    cursor: text;
+}
+
 
 a:link {
    color: #be7429;

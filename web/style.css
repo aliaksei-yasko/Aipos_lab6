@@ -1,0 +1,68 @@
+/* 
+    Document   : style
+    Created on : 26.11.2011, 23:02:12
+    Author     : Admin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: smaller;
+    padding: 50px;
+    color: #555;
+}
+
+h1 {
+    text-align: left;
+    letter-spacing: 6px;
+    font-size: 1.4em;
+    color: #be7429;
+    font-weight: normal;
+    width: 450px;
+}
+
+table {
+    width: 580px;
+    padding: 10px;
+    background-color: #c5e7e0;
+}
+
+th {
+    text-align: left;
+    border-bottom: 2px #be7429 solid;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px dashed;
+    line-height: 4;
+}
+
+input{
+    width: 100px;
+    height: 30px;
+    background-color: #be7429;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+a:link {
+   color: #be7429;
+   font-weight: normal;
+   text-decoration: none;
+}
+
+a:link:hover {
+   color: #be7429;
+   font-weight: normal;
+   text-decoration: underline;
+}
+

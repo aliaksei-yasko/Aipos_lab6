@@ -3,10 +3,10 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%-- 
+<%--
     Document   : deleteWeapon
     Created on : 27.11.2011, 16:11:41
-    Author     : Admin
+    Author     : Alexei Yasko
 --%>
 
 <fmt:requestEncoding value="utf-8" />

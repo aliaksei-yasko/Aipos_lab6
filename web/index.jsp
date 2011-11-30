@@ -1,10 +1,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%-- 
+<%--
     Document   : index
     Created on : 26.11.2011, 20:47:17
-    Author     : Admin
+    Author     : Alexei Yasko
 --%>
 
 <%-- Select weapon names from data base --%>

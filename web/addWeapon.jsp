@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- 
+<%--
     Document   : addWeapon
     Created on : 27.11.2011, 14:29:13
     Author     : Alexei Yasko
@@ -38,19 +38,19 @@
                 </sql:update>
             </c:catch>
 
-            <%-- If exeption wasn't catch --%>
+            <%-- If exeption wasn't catched --%>
             <c:if test="${result == null}">
-                <%-- If data base was updated display message about it --%>
+                <%-- If data base was updated than display message about it --%>
                 <c:if test="${count == 1}">
                     <center><h1>Оружие было добавлено.</h1></center>
                 </c:if>
-                <%-- If data base wasn't updated display message about it --%>
+                <%-- If data base wasn't updated than display message about it --%>
                 <c:if test="${count != 1}">
                     <center><h1>Оружие не было добавлено.</h1></center>
                 </c:if>
             </c:if>
 
-            <%-- If exeption was catch --%>
+            <%-- If exeption was catched --%>
             <c:if test="${result != null}">
                 <center><h1>Оружие не было добавлено.</h1></center>
             </c:if>

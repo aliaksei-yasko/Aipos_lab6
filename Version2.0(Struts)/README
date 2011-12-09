@@ -1,0 +1,3 @@
+This web application running in the glassfish 3.0 server
+for running nessesary to create data base connection pool and
+setup options record in web.xml, sun-resources.xml.
